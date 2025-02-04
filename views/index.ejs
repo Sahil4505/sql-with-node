@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        a {
+            text-decoration: none;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        a:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <a href="http://localhost:8080/users/new">Add new User</a>
+    <table>
+        <thead>
+            <tr>
+                <th>SR</th>
+                <th>ID</th>
+                <th>USERNAME</th>
+                <th>EMAIL</th>
+                <th>ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%let count=0%>
+            <% for(user of users){ %>
+                <%count++%>
+                <tr>
+                    <td><%=count%></td>
+                    <td><%=user.id%></td>
+                    <td><%=user.username%></td>
+                    <td><%=user.email%></td>
+                    <td>
+                        <a href="http://localhost:8080/users/<%= user.id %>" style="background-color:#ffc107; color:black;">Edit</a>
+                        <form method="post" action="/users/<%=user.id%>?_method=DELETE" style="display:inline;">
+                            <button>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>
